@@ -4,3 +4,6 @@ filters:
   functional_groups:
     smiles:
       - "CO"
+  find_in_db:
+    db_name: path
+    
