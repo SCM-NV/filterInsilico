@@ -9,11 +9,8 @@
 	},
 	"filters": {
 	    "type": "object",
-	    "description": "Filter to apply to the molecule collection",
-	    "enum": [
-		"functional_groups"
-	    ]
-	}
+	    "description": "Filter to apply to the molecule collection"
+	    }
     },
     "additionalProperties": false,
     "required": [

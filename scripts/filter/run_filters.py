@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 
 from filterInsilico.filters import apply_filters
 from filterInsilico.process_input import process_input

@@ -1,4 +1,4 @@
-input_file: test_files/smiles.smi
+input_file: tests/tests_files/smiles.smi
 
 filters:
   functional_groups:

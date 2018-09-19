@@ -27,11 +27,11 @@ setup(
         'topic :: scientific/engineering :: chemistry'
     ],
     install_requires=[
-        'pandas', 'jsonref', 'jsonschema'],
+        'pandas', 'jsonref', 'jsonschema', 'pyyaml'],
     extras_require={
         'test': ['coverage', 'pytest', 'pytest-cov']},
     scripts=[
-        'scripts/filter/filter.py'],
+        'scripts/filter/run_filters.py'],
     include_package_data=True,
     package_data={
         'filterInsilico': ['data/schemas/*json']

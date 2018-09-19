@@ -1,12 +1,13 @@
 from rdkit import Chem
-from typing import Dict
+from typing import (Dict, List)
 import pandas as pd
 
 
 def apply_filters(dict_input: Dict):
     """
     """
-    smiles = read_smiles(dict_input(input_file))
+    input_file = dict_input['input_file']
+    smiles = read_smiles(input_file)
     print(len(list(smiles)))
 
 
