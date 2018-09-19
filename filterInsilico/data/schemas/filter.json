@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Input to run a given workflow",
+    "type": "object",
+    "properties": {
+	"input_file": {
+	    "type": "string",
+	    "description": "Path to the file containing the molecules"
+	},
+	"filters": {
+	    "type": "object",
+	    "description": "Filter to apply to the molecule collection",
+	    "enum": [
+		"functional_groups"
+	    ]
+	}
+    },
+    "additionalProperties": false,
+    "required": [
+	"input_file",
+	"filters"
+  ]
+}

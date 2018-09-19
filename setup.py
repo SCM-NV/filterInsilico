@@ -27,7 +27,7 @@ setup(
         'topic :: scientific/engineering :: chemistry'
     ],
     install_requires=[
-        'qmflows', 'pymonad', 'jsonref', 'jsonschema'],
+        'pandas', 'jsonref', 'jsonschema'],
     extras_require={
         'test': ['coverage', 'pytest', 'pytest-cov']},
     scripts=[

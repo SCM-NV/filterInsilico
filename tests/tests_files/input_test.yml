@@ -1,0 +1,6 @@
+input_file: test_files/smiles.smi
+
+filters:
+  functional_groups:
+    smiles:
+      - "CO"
