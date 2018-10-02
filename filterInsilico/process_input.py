@@ -10,7 +10,7 @@ schema_filters = {
     }
 
 
-def process_input(input_file: str, workflow_name) -> Dict:
+def validate_input(input_file: str, workflow_name) -> Dict:
     """
     Read the input file in YAML format, validate it again the schema
     of `workflow_name` and return a nested dictionary with the input.
@@ -19,7 +19,7 @@ def process_input(input_file: str, workflow_name) -> Dict:
     path_schema = schema_filters[workflow_name]
     schema = load_json_schema(path_schema)
 
-    return validate_input(input_dict, schema)
+    return check_input(input_dict, schema)
 
 
 def extend_with_default(validator_class):
@@ -39,7 +39,7 @@ def extend_with_default(validator_class):
         validator_class, {"properties": set_defaults})
 
 
-def validate_input(input_dict: dict, schema: Dict) -> Dict:
+def check_input(input_dict: dict, schema: Dict) -> Dict:
     """
     Check that the input is correct following `schema` and get
     the default values from the schema.
