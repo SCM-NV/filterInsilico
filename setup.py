@@ -27,7 +27,7 @@ setup(
         'topic :: scientific/engineering :: chemistry'
     ],
     install_requires=[
-        'jsonref', 'jsonschema', 'pyyaml', 'pandas', 'scipy'],
+        'jsonref', 'jsonschema', 'pyyaml', 'pandas', 'pubchempy', 'scipy'],
     extras_require={
         'test': ['coverage', 'pytest', 'pytest-cov']},
     scripts=[
