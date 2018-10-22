@@ -8,7 +8,7 @@ def readme():
 
 
 setup(
-    name='filterInsilico',
+    name='insilico',
     version='0.0.1',
     description='Insilico filter of molecules based on some properties',
     license='Apache-2.0',
