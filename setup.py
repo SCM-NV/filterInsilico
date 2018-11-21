@@ -12,7 +12,7 @@ setup(
     version='0.0.1',
     description='Insilico filter of molecules based on some properties',
     license='Apache-2.0',
-    url='',
+    url='https://github.com/SCM-NV/filterInsilico',
     author=['Felipe Zapata', 'Ivan Infante'],
     author_email='fzapata_esciencecenter.nl',
     keywords='chemistry materials',
@@ -27,7 +27,7 @@ setup(
         'topic :: scientific/engineering :: chemistry'
     ],
     install_requires=[
-        'jsonref', 'jsonschema', 'pyyaml', 'pandas', 'pubchempy', 'scipy'],
+        'jsonref', 'jsonschema', 'pandas', 'pubchempy', 'pymongo', 'pyyaml', 'scipy'],
     extras_require={
         'test': ['coverage', 'pytest', 'pytest-cov']},
     scripts=[
