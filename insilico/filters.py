@@ -15,7 +15,7 @@ def apply_filters(dict_input: Dict, molecules: pd.DataFrame=None) -> pd.DataFram
         molecules = read_molecules(dict_input['input_file'])
     filters = dict_input['filters']
     if 'functional_groups' in filters:
-        df = filter_by_functional_group(molecules, filters['functional_groups'])
+        df = filter_by_functional_group(molecules, filters['functional_group'])
 
     return df
 

@@ -6,7 +6,7 @@ import yaml
 import pkg_resources as pkg
 
 schema_filters = {
-    'filter': pkg.resource_filename("filterInsilico", "data/schemas/filter.json")
+    'filter': pkg.resource_filename("filterInsilico", "data/schemas/workflow.json")
     }
 
 

@@ -1,0 +1,14 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema",
+    "description": "Molecular properties to compute",
+    "type": "object",
+    "properties": {
+	"compute_property": {
+	    "type": "array",
+	    "description": "Molecular properties to compute for a given dataset",
+	    "enum": [
+		"fingerprint"
+	    ]
+	}
+    }
+}

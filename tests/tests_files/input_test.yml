@@ -1,11 +1,16 @@
-input_file: tests/tests_files/smiles.smi
+name:
+  workflow
 
-filters:
-  functional_groups:
-    smiles:
-      - "CO"
-  find_in_db:
-    matlab:
-      path_to_db: "path_to_db"
-      
-    
+input_file:
+  tests/tests_files/smiles.smi
+
+steps:
+  - apply_filter:
+      functional_group:
+        smiles:
+          - "CO"
+
+  - compute_property:
+    - fingerprint
+
+

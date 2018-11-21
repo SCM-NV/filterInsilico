@@ -3,22 +3,26 @@
     "description": "Input to run a given workflow",
     "type": "object",
     "properties": {
+	"name": {
+	    "type": "string",
+	    "description": "Workflow name"
+	},
 	"input_file": {
 	    "type": "string",
 	    "description": "Path to the file containing the molecules"
 	},
-	"molecular_properties": {
-	    "type": "object",
-	    "description": "Molecular properties to compute for a given dataset"
-	},
-	"filters": {
-	    "type": "object",
-	    "description": "Filter to apply to the molecule collection"
-	    }
+	"steps": {
+	    "type": "array",
+	    "description": "Filters and/or molecular properties to compute",
+	    "anyOf": [
+		{"$ref": "schemas/apply_filter.json"},
+		{"ref": "schemas/compute_property.json"}
+	    ]
+	}
     },
     "additionalProperties": false,
     "required": [
 	"input_file",
-	"filters"
+	"steps"
   ]
 }
