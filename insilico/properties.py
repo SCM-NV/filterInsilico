@@ -1,10 +1,10 @@
-from filterInsilico.io import read_molecules
+from .io import read_molecules
 from rdkit import Chem
 from typing import Dict
 import pandas as pd
 
 
-def compute_properties(dict_input: Dict, molecules: pd.DataFrame=None) -> pd.DataFrame:
+def compute_property(dict_input: Dict, molecules: pd.DataFrame=None) -> pd.DataFrame:
     """
     Calculate a set of molecular properties define in `dict_input`.
     """

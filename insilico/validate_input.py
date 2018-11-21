@@ -6,7 +6,7 @@ import yaml
 import pkg_resources as pkg
 
 schema_filters = {
-    'filter': pkg.resource_filename("filterInsilico", "data/schemas/workflow.json")
+    'filter': pkg.resource_filename("insilico", "data/schemas/workflow.json")
     }
 
 
@@ -58,7 +58,7 @@ def load_json_schema(file_path: str) -> Dict:
     "Load a schema from `file_path` and use the absolute path for file references"
 
     # Absolute path prefix<
-    root = pkg.resource_filename('filterInsilico', 'data')
+    root = pkg.resource_filename('insilico', 'data')
 
     base_uri = "file://{}/".format(root)
 

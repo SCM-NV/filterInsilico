@@ -1,10 +1,10 @@
-from filterInsilico.io import read_molecules
+from .io import read_molecules
 from rdkit import Chem
 from typing import (Dict, List)
 import pandas as pd
 
 
-def apply_filters(dict_input: Dict, molecules: pd.DataFrame=None) -> pd.DataFrame:
+def apply_filter(dict_input: Dict, molecules: pd.DataFrame=None) -> pd.DataFrame:
     """
     Apply a different set of filters specified in `dict_input`
     to a molecular set.

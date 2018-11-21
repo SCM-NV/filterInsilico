@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 
-from filterInsilico.filters import apply_filters
-from filterInsilico.properties import compute_properties
-from filterInsilico.validate_input import validate_input
+from insilico.runner import run_workflow
+from insilico.validate_input import validate_input
 import argparse
 
 
@@ -15,12 +14,7 @@ parser.add_argument('-i', required=True, help="Input file in YAML format")
 def main():
     args = parser.parse_args()
     inp = validate_input(args.i, 'filter')
-
-    # compute_properties
-    df = compute_properties(inp)
-
-    # apply filters
-    apply_filters(df, inp)
+    run_workflow(inp)
 
 
 if __name__ == "__main__":

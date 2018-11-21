@@ -14,10 +14,12 @@
 	"steps": {
 	    "type": "array",
 	    "description": "Filters and/or molecular properties to compute",
-	    "anyOf": [
-		{"$ref": "schemas/apply_filter.json"},
-		{"ref": "schemas/compute_property.json"}
-	    ]
+	    "contains": {
+		"anyOf": [
+		    {"$ref": "schemas/apply_filter.json"},
+		    {"ref": "schemas/compute_property.json"}
+		]
+	    }
 	}
     },
     "additionalProperties": false,
