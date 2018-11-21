@@ -1,18 +1,12 @@
-from .io import read_molecules
 from rdkit import Chem
 from typing import Dict
 import pandas as pd
 
 
-def compute_property(dict_input: Dict, molecules: pd.DataFrame=None) -> pd.DataFrame:
+def compute_property(molecular_properties: Dict, molecules: pd.DataFrame=None) -> pd.DataFrame:
     """
     Calculate a set of molecular properties define in `dict_input`.
     """
-    if molecules is None:
-        molecules = read_molecules(dict_input['input_file'])
-
-    molecular_properties = dict_input['molecular_properties']
-
     funs = {'compute_fingerprint': compute_fingerprint}
 
     for prop in molecular_properties:
