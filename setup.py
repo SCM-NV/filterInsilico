@@ -29,7 +29,8 @@ setup(
     install_requires=[
         'jsonref', 'jsonschema', 'pandas', 'pubchempy', 'pymongo', 'pyyaml', 'scipy'],
     extras_require={
-        'test': ['coverage', 'pytest', 'pytest-cov']},
+        'test': ['coverage', 'pytest', 'pytest-cov'],
+        'doc': ['sphinx']},
     scripts=[
         'scripts/filter/run_filters.py'],
     include_package_data=True,

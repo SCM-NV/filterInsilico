@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/SCM-NV/filterInsilico.svg?branch=master)](https://travis-ci.org/SCM-NV/filterInsilico)
 
 # Insilico
 

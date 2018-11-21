@@ -38,6 +38,9 @@ coverage.xml
 *.prof
 *.out
 
+# Sphinx documentation
+doc/_build/
+
 # pytest
 .pytest*
 
