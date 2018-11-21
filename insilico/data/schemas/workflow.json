@@ -7,24 +7,24 @@
 	    "type": "string",
 	    "description": "Workflow name"
 	},
-	"input_file": {
+	"file_molecules": {
 	    "type": "string",
 	    "description": "Path to the file containing the molecules"
 	},
 	"steps": {
 	    "type": "array",
 	    "description": "Filters and/or molecular properties to compute",
-	    "contains": {
+	    "items": {
 		"anyOf": [
 		    {"$ref": "schemas/apply_filter.json"},
-		    {"ref": "schemas/compute_property.json"}
+		    {"$ref": "schemas/compute_property.json"}
 		]
 	    }
 	}
     },
     "additionalProperties": false,
     "required": [
-	"input_file",
+	"file_molecules",
 	"steps"
   ]
 }

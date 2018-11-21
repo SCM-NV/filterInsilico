@@ -3,24 +3,27 @@
     "description": "Filters to apply",
     "type": "object",
     "properties": {
-    "apply_filter": {
-	"type": "object",
-	"description": "Filter to apply to the molecule collection",
-	"properties": {
-	    "anyOf": [
-		{"functional_group": {
-		    "type": "object",
-		    "description": "functional groups to filter",
-		    "properties": {
-			"smiles": {
-			    "type": "array",
-			    "description": "smile of the functional group"			    
-			}
+	"apply_filter": {
+	    "type": "object",
+	    "description": "Filter to apply to the molecule collection",
+	    "additionalProperties": false,
+	    "properties": {
+		"id": {
+		    "type": "integer",
+		    "description": "job identifier"
+		},
+		"depends_on": {
+		    "type": "array",
+		    "description": "Identifiers of the other tasks that the current job depends on",
+		    "contains": {
+			"type": "integer"
 		    }
+		},
+		"filters": {
+		    "$ref": "filters.json"
 		}
-		}
-	    ]	    
+	    },
+	    "required": ["filters"]
 	}
-    }
     }
 }

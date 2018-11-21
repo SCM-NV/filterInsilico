@@ -1,16 +1,22 @@
 name:
   workflow
 
-input_file:
+file_molecules:
   tests/tests_files/smiles.smi
 
 steps:
   - apply_filter:
-      functional_group:
-        smiles:
-          - "CO"
+      id: 1
+      filters:
+        functional_group:
+          smiles:
+            - "CO"
 
   - compute_property:
-    - fingerprint
+      id: 2
+      depends_on: [1]
+      property:
+      - fingerprint
+
 
 

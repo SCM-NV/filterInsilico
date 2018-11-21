@@ -4,11 +4,28 @@
     "type": "object",
     "properties": {
 	"compute_property": {
-	    "type": "array",
+	    "type": "object",
 	    "description": "Molecular properties to compute for a given dataset",
-	    "enum": [
+	    "properties": {
+		"id": {
+		    "type": "integer",
+		    "description": "job identifier"
+		},
+		"depends_on": {
+		    "type": "array",
+		    "description": "Identifiers of the other tasks that the current job depends on",
+		    "contains": {
+			"type": "integer"
+		    }
+		}
+	    },
+	    "property": {
+		"type": "array",
+		"description": "Molecular properties",
+		"enum": [
 		"fingerprint"
-	    ]
+		]
+	    }
 	}
     }
 }
