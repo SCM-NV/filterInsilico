@@ -9,10 +9,12 @@ def apply_filter(filters: Dict, molecules: pd.DataFrame=None) -> pd.DataFrame:
 
     :returns: Pandas Dataframe
     """
-    if 'functional_groups' in filters:
-        df = filter_by_functional_group(molecules, filters['functional_group'])
+    keywords = ['functional_groups']
+    for key in keywords:
+        if key in filters:
+            molecules = filter_by_functional_group(molecules, filters[key])
 
-    return df
+    return molecules
 
 
 def filter_by_functional_group(molecules: pd.DataFrame, functional_groups: List) -> pd.DataFrame:

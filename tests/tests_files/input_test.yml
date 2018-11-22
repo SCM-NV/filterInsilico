@@ -8,7 +8,7 @@ steps:
   - apply_filter:
       id: 1
       filters:
-        functional_group:
+        functional_groups:
           smiles:
             - "CO"
 

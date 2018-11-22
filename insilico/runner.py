@@ -4,7 +4,7 @@ from dask import delayed
 from insilico.filters import apply_filter
 from insilico.properties import compute_property
 from typing import (Dict, List)
-# import dask.dataframe as dd
+import dask
 import pandas as pd
 
 
@@ -41,8 +41,8 @@ def build_graph(steps: Dict, state: pd.DataFrame) -> object:
         dict_input = obj[keyword]
         idx = dict_input['id']
         calc = dict_input[dict_calculations[keyword]]
-        dependencies = dict_input['depends_on']
-        if not dependencies:
+        dependencies = dict_input.get('depends_on')
+        if not dependencies or dependencies is None:
             results[idx] = fun(calc, state)
         else:
             if len(dependencies) == 1:
@@ -63,9 +63,9 @@ def select_calculation(obj: Dict, keywords: List) -> str:
             return k
 
 
-def runner(graph: object):
+def runner(dag: object):
     """
     Run the Direct Acyclic Graph containing all the filters and
     properties.
     """
-    pass
+    print(dask.compute(dag)[0])

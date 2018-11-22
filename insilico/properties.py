@@ -1,4 +1,5 @@
 from rdkit import Chem
+from rdkit.Chem.Fingerprints import FingerprintMols
 from typing import Dict
 import pandas as pd
 
@@ -7,10 +8,11 @@ def compute_property(molecular_properties: Dict, molecules: pd.DataFrame=None) -
     """
     Calculate a set of molecular properties define in `dict_input`.
     """
-    funs = {'compute_fingerprint': compute_fingerprint}
+    funs = {'fingerprint': compute_fingerprint}
 
     for prop in molecular_properties:
-        molecules = funs[prop](molecules)
+        if prop in funs:
+            molecules = funs[prop](molecules)
 
     return molecules
 
@@ -21,6 +23,7 @@ def compute_fingerprint(
     Add a new column to the dataframe with `fingerprint_type`.
     """
     mols = molecules.smiles.apply(lambda x: Chem.MolFromSmiles(x))
-    molecules[fingerprint_type] = mols.appy(lambda x: Chem.FingerMols.FingerprintMol(x))
+    name = 'fingerprint_' + fingerprint_type
+    molecules[name] = mols.apply(lambda x: FingerprintMols.FingerprintMol(x))
 
     return molecules
