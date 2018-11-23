@@ -10,6 +10,9 @@ Welcome to insilico's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   insilico
+   tutorial
+   library
 
 
 Indices and tables

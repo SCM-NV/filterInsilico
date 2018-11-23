@@ -39,7 +39,7 @@ coverage.xml
 *.out
 
 # Sphinx documentation
-doc/_build/
+docs/_build/
 
 # pytest
 .pytest*
