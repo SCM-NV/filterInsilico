@@ -36,6 +36,6 @@ setup(
         'scripts/filter/run_filters.py'],
     include_package_data=True,
     package_data={
-        'filterInsilico': ['data/schemas/*json']
+        'insilico': ['data/schemas/*json']
     }
 )
