@@ -30,7 +30,7 @@ setup(
         'dask', 'jsonref', 'jsonschema', 'pandas', 'pubchempy', 'pymongo', 'pyyaml', 'scipy'],
     extras_require={
         'qc': ['qmflows'],
-        'test': ['coverage', 'pytest', 'pytest-cov'],
+        'test': ['coverage', 'pytest', 'pytest-cov', 'codacy-coverage'],
         'doc': ['sphinx']},
     scripts=[
         'scripts/filter/run_filters.py'],
