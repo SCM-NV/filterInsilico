@@ -3,5 +3,5 @@
 
 # Insilico
 
-A python library to carry out virtual screening of molecules based on their molecular properties.
+A python library to carry out virtual screening of molecules based on their physico-chemical properties. see [documentation](https://filterinsilico.readthedocs.io/en/latest/)
 
