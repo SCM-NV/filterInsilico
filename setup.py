@@ -19,7 +19,7 @@ setup(
     long_description=readme(),
     packages=find_packages(),
     classifiers=[
-        'License :: OSI Approved :: MIT License',
+        'License :: OSI Approved :: Apache-2.0',
         'Intended Audience :: Science/Research',
         'programming language :: python :: 3',
         'development status :: 4 - Beta',
@@ -29,6 +29,7 @@ setup(
     install_requires=[
         'dask', 'jsonref', 'jsonschema', 'pandas', 'pubchempy', 'pymongo', 'pyyaml', 'scipy'],
     extras_require={
+        'qc': ['qmflows'],
         'test': ['coverage', 'pytest', 'pytest-cov'],
         'doc': ['sphinx']},
     scripts=[
