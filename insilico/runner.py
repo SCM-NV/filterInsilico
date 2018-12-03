@@ -2,7 +2,7 @@
 from .io import read_molecules
 from dask import delayed
 from insilico.filters import apply_filter
-from insilico.properties import compute_property
+from insilico.properties import (compute_property, search_property)
 from typing import (Dict, List)
 import dask
 import pandas as pd
@@ -28,15 +28,18 @@ def build_graph(steps: Dict, state: pd.DataFrame) -> object:
     # create Dask delayed functions
     delayed_apply_filter = delayed(apply_filter)
     delayed_compute_property = delayed(compute_property)
+    delayed_search_property = delayed(search_property)
 
     dict_funs = {'apply_filter': delayed_apply_filter,
-                 'compute_property': delayed_compute_property}
-    dict_calculations = {'apply_filter': 'filters',
-                         'compute_property': 'property'}
+                 'compute_property': delayed_compute_property,
+                 'search_property': delayed_search_property}
+    dict_calculations = {
+        'apply_filter': 'filters', 'compute_property': 'property', 'search_property': 'property'}
 
     results = {}
     for obj in steps:
-        keyword = select_calculation(obj, ['apply_filter', 'compute_property'])
+        print(obj)
+        keyword = select_calculation(obj, ['apply_filter', 'compute_property', 'search_property'])
         fun = dict_funs[keyword]
         dict_input = obj[keyword]
         idx = dict_input['id']
@@ -49,7 +52,7 @@ def build_graph(steps: Dict, state: pd.DataFrame) -> object:
                 parent_id = dependencies[0]
                 results[idx] = fun(calc, results[parent_id])
             else:
-                raise(NotImplemented)
+                raise(NotImplementedError)
 
     return results
 
@@ -68,4 +71,4 @@ def runner(dag: object):
     Run the Direct Acyclic Graph containing all the filters and
     properties.
     """
-    print(dask.compute(dag)[0])
+    return dask.compute(dag)[0]

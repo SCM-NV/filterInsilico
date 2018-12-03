@@ -18,5 +18,11 @@ steps:
       property:
       - fingerprint
 
+  - search_property:
+      id: 2
+      depends_on: [1]
+      property:
+        - solubility:
+            water
 
 

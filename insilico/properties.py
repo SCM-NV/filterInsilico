@@ -17,6 +17,12 @@ def compute_property(molecular_properties: Dict, molecules: pd.DataFrame=None) -
     return molecules
 
 
+def search_property(molecular_properties: Dict, state: pd.DataFrame) -> pd.DataFrame:
+    """ """
+
+    return state
+
+
 def compute_fingerprint(
         molecules: pd.DataFrame, fingerprint_type: str="topological") -> pd.DataFrame:
     """
