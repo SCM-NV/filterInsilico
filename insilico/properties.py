@@ -39,7 +39,7 @@ def search_property_in_sources(mol: str, prop: str, sources: List):
         if prop in df:
             return df[prop].values[0]
 
-    return 42
+    return None
 
 
 def compute_fingerprint(
