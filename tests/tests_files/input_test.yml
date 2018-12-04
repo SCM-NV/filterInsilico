@@ -22,7 +22,5 @@ steps:
       id: 2
       depends_on: [1]
       property:
-        - solubility:
-            water
-
+        - xlogp
 

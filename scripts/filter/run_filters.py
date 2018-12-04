@@ -14,7 +14,8 @@ parser.add_argument('-i', required=True, help="Input file in YAML format")
 def main():
     args = parser.parse_args()
     inp = validate_input(args.i, 'filter')
-    run_workflow(inp)
+    df = run_workflow(inp)
+    print(df)
 
 
 if __name__ == "__main__":

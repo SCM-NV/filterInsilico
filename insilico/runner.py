@@ -38,7 +38,6 @@ def build_graph(steps: Dict, state: pd.DataFrame) -> object:
 
     results = {}
     for obj in steps:
-        print(obj)
         keyword = select_calculation(obj, ['apply_filter', 'compute_property', 'search_property'])
         fun = dict_funs[keyword]
         dict_input = obj[keyword]
@@ -71,4 +70,6 @@ def runner(dag: object):
     Run the Direct Acyclic Graph containing all the filters and
     properties.
     """
-    return dask.compute(dag)[0]
+    results = dask.compute(dag)[0]
+
+    return pd.concat(results, axis=0).drop_duplicates().reset_index(drop=True)
