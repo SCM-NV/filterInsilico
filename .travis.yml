@@ -18,6 +18,7 @@ install:
   # Install virtual enviroment 
   - conda install -c rdkit rdkit==2018.03.4.0
   - conda install dask
+  - pip install cytoolz
 
   # Install the package
   - pip install .[test]
