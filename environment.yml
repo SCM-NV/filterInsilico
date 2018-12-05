@@ -3,6 +3,6 @@ channels:
   - rdkit
 dependencies:
   - python=3.5
-  - rkdit
+  - rdkit
   - dask
   - pandas
