@@ -27,15 +27,11 @@ setup(
         'topic :: scientific/engineering :: chemistry'
     ],
     install_requires=[
-        'dask', 'jsonref', 'jsonschema', 'pandas', 'pubchempy', 'pymongo', 'pyyaml', 'scipy'],
+        'dask', 'pandas', 'pubchempy', 'pymongo', 'pyyaml', 'scipy', 'schema'],
     extras_require={
         'qc': ['qmflows'],
         'test': ['coverage', 'pytest', 'pytest-cov', 'codacy-coverage'],
         'doc': ['sphinx']},
     scripts=[
-        'scripts/filter/run_filters.py'],
-    include_package_data=True,
-    package_data={
-        'insilico': ['data/schemas/*json']
-    }
+        'scripts/filter/run_filters.py']
 )

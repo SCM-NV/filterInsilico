@@ -12,7 +12,7 @@ parser.add_argument('-i', required=True, help="Input file in YAML format")
 
 def main():
     args = parser.parse_args()
-    inp = validate_input(args.i, 'filter')
+    inp = validate_input(args.i)
     run_workflow(inp)
 
 
