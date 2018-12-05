@@ -9,7 +9,13 @@ import pandas as pd
 def compute_property(molecular_properties: Dict, molecules: pd.DataFrame,
                      dependencies: Dict=None) -> pd.DataFrame:
     """
-    Calculate a set of molecular properties define in `dict_input`.
+    Calculate a set of `molecular_properties`.
+
+    :param dict molecular_properties: Properties to compute
+    :param molecules: Pandas DataFrame containing the properties
+    :param dict dependencies: Current task parent
+    :returns: Pandas Dataframe
+
     """
     funs = {'fingerprint': compute_fingerprint}
     if dependencies is not None:
@@ -25,10 +31,16 @@ def compute_property(molecular_properties: Dict, molecules: pd.DataFrame,
     return molecules
 
 
-def search_property(properties: List, molecules: pd.DataFrame,
+def search_property(molecular_properties: List, molecules: pd.DataFrame,
                     dependencies: Dict=None) -> pd.DataFrame:
     """
-   Search for a set of `molecular_properties` in the pubchem database.
+    Search for a set of `molecular_properties` in the pubchem database.
+
+    :param dict molecular_properties: Properties to look at
+    :param molecules: Pandas DataFrame containing the properties
+    :param dict dependencies: Current task parent
+    :returns: Pandas Dataframe
+
     """
     if dependencies is not None:
         df = apply_dependencies(molecules, dependencies)
@@ -36,13 +48,13 @@ def search_property(properties: List, molecules: pd.DataFrame,
         df = molecules
 
     results = pd.concat(
-        {i: search_property_in_sources(s, properties, "pubchem")
+        {i: search_property_in_sources(s, molecular_properties, "pubchem")
          for i, s in zip(df.index, df.smiles)},
         ignore_index=False)
 
     results.reset_index(level=1, drop=True, inplace=True)
 
-    for prop in properties:
+    for prop in molecular_properties:
         if prop in results.columns:
             molecules[prop] = results[prop]
 

@@ -16,7 +16,8 @@ def run_workflow(dict_input: Dict) -> pd.DataFrame:
     """
     Run the workflow specified in the `dict_input`.
 
-    :return: Pandas DataFrame containing the results
+    :param dict dict_input:  Input provided by the user
+    :returns: Pandas DataFrame containing the results
     """
     molecules = read_molecules(dict_input['file_molecules'])
     dag = build_graph(dict_input['steps'], molecules)
@@ -26,12 +27,15 @@ def run_workflow(dict_input: Dict) -> pd.DataFrame:
     return results
 
 
-def build_graph(steps: Dict, state: pd.DataFrame) -> object:
+def build_graph(steps: Dict, state: pd.DataFrame) -> Dict:
     """
     Create a Direct Acyclic Graph containing all the dependencies
     between the filters and the properties to compute.
+
+    :param dict steps: Task to perform
+    :param state: Current DataFrame used as state
     :return: Dictionary representing the graph of dependencies
-    :raise: `DependencyError`
+    :raises DependencyError: if the dependencies are incongruent
     """
     # create Dask delayed functions
     delayed_apply_filter = delayed(apply_filter)
@@ -89,10 +93,12 @@ def select_calculation(obj: Dict, keywords: List) -> str:
             return k
 
 
-def runner(dag: object):
+def runner(dag: object) -> pd.DataFrame:
     """
     Run the Direct Acyclic Graph containing all the filters and
     properties.
+
+    :return: Pandas DataFrame containing the results
     """
     results = dask.compute(dag)[0]
 

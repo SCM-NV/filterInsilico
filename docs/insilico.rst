@@ -13,8 +13,10 @@ Installation
   
 Virtual Screening
 =================
+Virtual screening allows to filter a set of molecules based on their physico-chemical
+properties from a potentially large number of candidates. 
 
 
 .. _miniconda: http://conda.pydata.org/miniconda.html
 .. _rdkit: http://www.rdkit.org
-
+.. _dask: https://dask.org/

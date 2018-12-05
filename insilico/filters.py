@@ -3,10 +3,14 @@ from typing import (Dict, List)
 import pandas as pd
 
 
-def apply_filter(filters: Dict, molecules: pd.DataFrame, dependencies: Dict=None) -> pd.DataFrame:
+def apply_filter(
+        filters: Dict, molecules: pd.DataFrame, dependencies: Dict=None) -> pd.DataFrame:
     """
     Apply a different set of `filters` to a molecular set.
 
+    :param dict filters: Set of predicates to filter the molecules
+    :param molecules: Pandas DataFrame containing the properties
+    :param dict dependencies: Current task parent
     :returns: Pandas Dataframe
     """
     keywords = ['functional_groups']
