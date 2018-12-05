@@ -8,6 +8,10 @@ import dask
 import pandas as pd
 
 
+class DependencyError(Exception):
+    pass
+
+
 def run_workflow(dict_input: Dict):
     """
     Run the workflow specified in the `dict_input`.
@@ -25,6 +29,8 @@ def build_graph(steps: Dict, state: pd.DataFrame) -> object:
     """
     Create a Direct Acyclic Graph containing all the dependencies
     between the filters and the properties to compute.
+    :return: Dictionary representing the graph of dependencies
+    :raise: `DependencyError`
     """
     # create Dask delayed functions
     delayed_apply_filter = delayed(apply_filter)
@@ -48,6 +54,8 @@ def build_graph(steps: Dict, state: pd.DataFrame) -> object:
         dependencies = dict_input.get('depends_on')
         if not dependencies or dependencies is None:
             results[idx] = fun(calc, state)
+        elif idx in results:
+            raise DependencyError("ID for the tasks must be unique")
         else:
             parent_id = dependencies
             results[idx] = fun(
