@@ -12,16 +12,17 @@ class DependencyError(Exception):
     pass
 
 
-def run_workflow(dict_input: Dict):
+def run_workflow(dict_input: Dict) -> pd.DataFrame:
     """
     Run the workflow specified in the `dict_input`.
+
+    :return: Pandas DataFrame containing the results
     """
     molecules = read_molecules(dict_input['file_molecules'])
     dag = build_graph(dict_input['steps'], molecules)
 
     results = runner(dag)
 
-    print(results)
     return results
 
 
