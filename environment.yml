@@ -1,0 +1,8 @@
+name: insilico
+channels:
+  - rdkit
+dependencies:
+  - python=3.5
+  - rkdit
+  - dask
+  - pandas
