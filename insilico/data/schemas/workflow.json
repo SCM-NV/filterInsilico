@@ -13,14 +13,7 @@
 	},
 	"steps": {
 	    "type": "array",
-	    "description": "Filters and/or molecular properties to compute",
-	    "items": {
-		"anyOf": [
-		    {"$ref": "schemas/apply_filter.json"},
-		    {"$ref": "schemas/compute_property.json"},
-		    {"$ref": "schemas/search_property.json"}
-		]
-	    }
+	    "description": "Filters and/or molecular properties to compute"
 	}
     },
     "additionalProperties": false,

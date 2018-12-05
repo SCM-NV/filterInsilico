@@ -1,8 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema",
     "description": "Filters to apply",
-    "type": "object",
-    "properties": {
 	"apply_filter": {
 	    "type": "object",
 	    "description": "Filter to apply to the molecule collection",
@@ -17,10 +15,26 @@
 		    "description": "Identifiers of the other tasks that the current job depends on"
 		},
 		"filters": {
-		    "$ref": "filters.json"
-		}
+		    "type": "object",
+		    "properties" : {
+			"functional_groups": {
+			    "type": "object",
+			    "description": "functional groups to filter",
+			    "properties": {
+				"smiles": {
+				    "type": "array",
+				    "description": "smile of the functional group",
+				    "items": {
+					"type": "string"
+				    }
+				}
+			    },
+			    "required": ["smiles"]
+			}
+		    },
+		    "required": ["functional_groups"]
+		}		
 	    },
-	    "required": ["filters"]
+	    "required": ["filters", "id"]
 	}
-    }
 }

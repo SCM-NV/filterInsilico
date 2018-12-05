@@ -14,15 +14,16 @@
 		"depends_on": {
 		    "type": "integer",
 		    "description": "Identifiers of the other tasks that the current job depends on"
+		},
+		"property": {
+		    "type": "array",
+		    "description": "Molecular properties",
+		    "enum": [
+			"fingerprint"
+		    ]
 		}
 	    },
-	    "property": {
-		"type": "array",
-		"description": "Molecular properties",
-		"enum": [
-		"fingerprint"
-		]
-	    }
+	    "required": ["property", "id"]
 	}
     }
 }
