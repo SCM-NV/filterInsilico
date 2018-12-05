@@ -12,7 +12,5 @@ Graph of Dependecies
 --------------------
 
 .. autofunction:: insilico.runner.build_graph
-
 .. autofunction:: insilico.runner.runner
-		  
 .. autoclass:: insilico.runner.DependencyError		  
