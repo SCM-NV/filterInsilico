@@ -1,6 +1,11 @@
 Library API
 ===========
 
+Input validation
+----------------
+.. autofunction:: insilico.validate_input.validate_input
+
+
 Tasks
 -----
 

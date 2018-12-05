@@ -5,10 +5,10 @@ import yaml
 
 def validate_input(input_file: str) -> Dict:
     """
-    Read the input file in YAML format, validate it against the
+    Read the `input_file` in YAML format, validate it against the
     corresponding schema and return a nested dictionary with the input.
 
-    :param str input_file: path to the input in YAML format.
+    :param str input_file: path to the input
     :return: Input as dictionary
     :raise SchemaError: If the input is not valid
     """
