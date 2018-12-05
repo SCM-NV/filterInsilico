@@ -17,7 +17,8 @@
 	    "items": {
 		"anyOf": [
 		    {"$ref": "schemas/apply_filter.json"},
-		    {"$ref": "schemas/compute_property.json"}
+		    {"$ref": "schemas/compute_property.json"},
+		    {"$ref": "schemas/search_property.json"}
 		]
 	    }
 	}

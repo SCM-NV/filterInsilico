@@ -1,54 +1,74 @@
+from .dependencies import apply_dependencies
 from .db import get_data_from_pubchem
 from rdkit import Chem
 from rdkit.Chem.Fingerprints import FingerprintMols
-from typing import (Dict, List)
+from typing import (Dict, List, Tuple)
 import pandas as pd
 
 
-def compute_property(molecular_properties: Dict, molecules: pd.DataFrame=None) -> pd.DataFrame:
+def compute_property(molecular_properties: Dict, molecules: pd.DataFrame,
+                     dependencies: Dict=None) -> pd.DataFrame:
     """
     Calculate a set of molecular properties define in `dict_input`.
     """
     funs = {'fingerprint': compute_fingerprint}
+    if dependencies is not None:
+        df = apply_dependencies(molecules, dependencies)
+    else:
+        df = molecules
 
     for prop in molecular_properties:
         if prop in funs:
-            molecules = funs[prop](molecules)
+            name, series = funs[prop](df)
+            molecules[name] = series
 
     return molecules
 
 
-def search_property(molecular_properties: List, state: pd.DataFrame,
-                    sources: List=["pubchem"]) -> pd.DataFrame:
+def search_property(properties: List, molecules: pd.DataFrame,
+                    dependencies: Dict=None) -> pd.DataFrame:
     """
-   Search for a set of `molecular_properties` in different `sources`.
+   Search for a set of `molecular_properties` in the pubchem database.
     """
-    for key in molecular_properties:
-        state[key] = state.smiles.apply(lambda x: search_property_in_sources(x, key, sources))
+    if dependencies is not None:
+        df = apply_dependencies(molecules, dependencies)
+    else:
+        df = molecules
 
-    return state
+    results = pd.concat(
+        {i: search_property_in_sources(s, properties, "pubchem")
+         for i, s in zip(df.index, df.smiles)},
+        ignore_index=False)
+
+    results.reset_index(level=1, drop=True, inplace=True)
+
+    for prop in properties:
+        if prop in results.columns:
+            molecules[prop] = results[prop]
+
+    return molecules
 
 
-def search_property_in_sources(mol: str, prop: str, sources: List):
+def search_property_in_sources(mol: str, properties: List, sources: str):
     """
-    Search for molecular `prop` for molecule `mol` in online `sources`.
+    Search for molecular `properties` for molecule `mol` in online `sources`.
     """
     funs = {"pubchem": get_data_from_pubchem}
-    for s in sources:
-        df = funs[s](mol)
-        if prop in df:
-            return df[prop].values[0]
+    df = funs[sources](mol)
 
-    return None
+    results = []
+    for prop in properties:
+        if prop in df:
+            results.append(prop)
+    return df[results]
 
 
 def compute_fingerprint(
-        molecules: pd.DataFrame, fingerprint_type: str="topological") -> pd.DataFrame:
+        molecules: pd.DataFrame, fingerprint_type: str="topological") -> Tuple:
     """
     Add a new column to the dataframe with `fingerprint_type`.
     """
     mols = molecules.smiles.apply(lambda x: Chem.MolFromSmiles(x))
     name = 'fingerprint_' + fingerprint_type
-    molecules[name] = mols.apply(lambda x: FingerprintMols.FingerprintMol(x))
-
-    return molecules
+    series = mols.apply(lambda x: FingerprintMols.FingerprintMol(x))
+    return name, series

@@ -14,13 +14,13 @@ steps:
 
   - compute_property:
       id: 2
-      depends_on: [1]
+      depends_on: 1
       property:
       - fingerprint
 
   - search_property:
-      id: 2
-      depends_on: [1]
+      id: 3
+      depends_on: 1
       property:
         - xlogp
 

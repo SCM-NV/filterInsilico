@@ -3,7 +3,7 @@ from typing import (Dict, List)
 import pandas as pd
 
 
-def apply_filter(filters: Dict, molecules: pd.DataFrame=None) -> pd.DataFrame:
+def apply_filter(filters: Dict, molecules: pd.DataFrame, dependencies: Dict=None) -> pd.DataFrame:
     """
     Apply a different set of `filters` to a molecular set.
 
@@ -26,7 +26,7 @@ def filter_by_functional_group(molecules: pd.DataFrame, functional_groups: List)
     patterns = [Chem.MolFromSmiles(f) for f in functional_groups['smiles']]
 
     # Check if the functional_groups are in the molecules
-    molecules['has_functional_group'] = mols.apply(
+    molecules['functional_groups'] = mols.apply(
         lambda m: any(m.HasSubstructMatch(p) for p in patterns))
 
     return molecules

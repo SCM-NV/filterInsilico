@@ -17,6 +17,7 @@ def run_workflow(dict_input: Dict):
 
     results = runner(dag)
 
+    print(results)
     return results
 
 
@@ -38,22 +39,36 @@ def build_graph(steps: Dict, state: pd.DataFrame) -> object:
 
     results = {}
     for obj in steps:
-        keyword = select_calculation(obj, ['apply_filter', 'compute_property', 'search_property'])
-        fun = dict_funs[keyword]
-        dict_input = obj[keyword]
+        keywords = ['apply_filter', 'compute_property', 'search_property']
+        key = select_calculation(obj, keywords)
+        fun = dict_funs[key]
+        dict_input = obj[key]
         idx = dict_input['id']
-        calc = dict_input[dict_calculations[keyword]]
+        calc = dict_input[dict_calculations[key]]
         dependencies = dict_input.get('depends_on')
         if not dependencies or dependencies is None:
             results[idx] = fun(calc, state)
         else:
-            if len(dependencies) == 1:
-                parent_id = dependencies[0]
-                results[idx] = fun(calc, results[parent_id])
-            else:
-                raise(NotImplementedError)
+            parent_id = dependencies
+            results[idx] = fun(
+                calc, results[parent_id], retrieve_dependencies(steps, parent_id, keywords))
 
     return results
+
+
+def retrieve_dependencies(steps: dict, parent_id: int, keywords) -> dict:
+    """
+    Return the dictionary of dependencies of a given task
+    """
+    def get_dict_task(step):
+        for k in keywords:
+            if k in step:
+                return step[k]
+
+    for step in steps:
+        dict_task = get_dict_task(step)
+        if dict_task["id"] == parent_id:
+            return dict_task
 
 
 def select_calculation(obj: Dict, keywords: List) -> str:
@@ -72,4 +87,4 @@ def runner(dag: object):
     """
     results = dask.compute(dag)[0]
 
-    return pd.concat(results, axis=0).drop_duplicates().reset_index(drop=True)
+    return pd.concat(results, axis=0, sort=False).drop_duplicates().reset_index(drop=True)

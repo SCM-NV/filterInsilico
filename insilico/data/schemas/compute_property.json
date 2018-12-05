@@ -12,11 +12,8 @@
 		    "description": "job identifier"
 		},
 		"depends_on": {
-		    "type": "array",
-		    "description": "Identifiers of the other tasks that the current job depends on",
-		    "contains": {
-			"type": "integer"
-		    }
+		    "type": "integer",
+		    "description": "Identifiers of the other tasks that the current job depends on"
 		}
 	    },
 	    "property": {
